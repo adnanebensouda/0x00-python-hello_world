@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-for alphabt in range(97, 123):
-        if chr(alphabt) == 'q' or chr(alphabt) == 'e':
-                    continue
-                    print(chr(alphabt).format(alphabt), end='')
+for alphab in range(97, 123):
+    if chr(alphab) == 'q' or chr(alphab) == 'e':
+        continue
+    print(chr(alphab).format(alphab), end='')
