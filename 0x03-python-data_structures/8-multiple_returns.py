@@ -1,10 +1,8 @@
 #!/usr/bin/python3
-
 def multiple_returns(sentence):
-    len = len(sentence)
-    if len == 0:
-        result = (0, None)
-        return result
+    my_tuples = ()
+    if len(sentence) == 0:
+        my_tuples = 0, "None"
     else:
-        res = (len, sentence[0:1])
-        return res
+        my_tuples = len(sentence), sentence[0]
+    return my_tuples
