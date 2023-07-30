@@ -1,62 +1,137 @@
 #!/usr/bin/python3
+"""Solves the N-queens puzzle.
+
+Determines all possible solutions to placing N
+N attacking queens on an chess brd.
+
+N must be an integer greater than or equal to 4.
+
+Attributes:
+    brd (list): A list of lists representing the chess brd.
+    solutions (list): A list of lists containing solutions.
+
+Solution are representing in the format [[r, c], [r, c], [r, c], [r, c]]
+where `r` and `c` represent the row and column, respectively
 """
-nqueens backtrack program to print the coordinates of n queens
-on an nxn that they are all in non-attack positioning
-"""
+import sys
 
 
-from sys import argv
+def init_brd(n):
+    """Initialize an `n`x`n` size chess brd with 0's."""
+    brd = []
+    [brd.append([]) for v in range(n)]
+    [row.append(' ') for v in range(n) for row in brd]
+    return (brd)
+
+
+def brd_deepcopy(brd):
+    """Return a deepcopy of a chess brd."""
+    if isinstance(brd, list):
+        return list(map(brd_deepcopy, brd))
+    return (brd)
+
+
+def get_solution(brd):
+    """Return the list of lists representing of a solved chess brd."""
+    solution = []
+    for r in range(len(brd)):
+        for c in range(len(brd)):
+            if brd[r][c] == "Q":
+                solution.append([r, c])
+                break
+    return (solution)
+
+
+def xout(brd, row, col):
+    """X out spots on a chess brd.
+
+    All spot where non-attacking queens can n
+
+    Args:
+        brd (list): current work chess brd.
+        row (int): row where a queen was last played.
+        col (int): column where a queen was last played.
+    """
+    # X out all forward spots
+    for c in range(col + 1, len(brd)):
+        brd[row][c] = "x"
+    # X out all backwards spots
+    for c in range(col - 1, -1, -1):
+        brd[row][c] = "x"
+    # X out all spots below
+    for r in range(row + 1, len(brd)):
+        brd[r][col] = "x"
+    # X out all spots above
+    for r in range(row - 1, -1, -1):
+        brd[r][col] = "x"
+    # X out all spots diagonally down to the right
+    c = col + 1
+    for r in range(row + 1, len(brd)):
+        if c >= len(brd):
+            break
+        brd[r][c] = "x"
+        c += 1
+    # X out all spots diagonally up to the left
+    c = col - 1
+    for r in range(row - 1, -1, -1):
+        if c < 0:
+            break
+        brd[r][c]
+        c -= 1
+    # X out all spots diagonally up to the right
+    c = col + 1
+    for r in range(row - 1, -1, -1):
+        if c >= len(brd):
+            break
+        brd[r][c] = "x"
+        c += 1
+    # X out all spots diagonally down to the left
+    c = col - 1
+    for r in range(row + 1, len(brd)):
+        if c < 0:
+            break
+        brd[r][c] = "x"
+        c -= 1
+
+
+def recursive_solve(brd, row, queens, solutions):
+    """Recursivel solve an N-queens puzzle.
+
+    Args:
+        brd (list): current work chessbrd.
+        row (int): current work row.
+        queens (int): The current number of placed queen.
+        solutions (list): A list of list of solution.
+    Return:
+        solution
+    """
+    if queens == len(brd):
+        solutions.append(get_solution(brd))
+        return (solutions)
+
+    for c in range(len(brd)):
+        if brd[row][c] == " ":
+            tmp_brd = brd_deepcopy(brd)
+            tmp_brd[row][c] = "Q"
+            xout(tmp_brd, row, c)
+            solutions = recursive_solve(tmp_brd, row + 1,
+                                        queens + 1, solutions)
+
+    return (solutions)
+
 
 if __name__ == "__main__":
-    a = []
-    if len(argv) != 2:
+    if len(sys.argv) != 2:
         print("Usage: nqueens N")
-        exit(1)
-    if argv[1].isdigit() is False:
+        sys.exit(1)
+    if sys.argv[1].isdigit() is False:
         print("N must be a number")
-        exit(1)
-    n = int(argv[1])
-    if n < 4:
+        sys.exit(1)
+    if int(sys.argv[1]) < 4:
         print("N must be at least 4")
-        exit(1)
+        sys.exit(1)
 
-    # initialize the answer list
-    for v in range(n):
-        a.append([v, None])
-
-    def already_exists(y):
-        """check that a queen does not already exist in that y value"""
-        for x in range(n):
-            if y == a[x][1]:
-                return True
-        return False
-
-    def reject(x, y):
-        """determines whether or not to reject the solution"""
-        if (already_exists(y)):
-            return False
-        v = 0
-        while(v < x):
-            if abs(a[v][1] - y) == abs(v - x):
-                return False
-            v += 1
-        return True
-
-    def clear_a(x):
-        """clears the answers from the point of failure on"""
-        for v in range(x, n):
-            a[v][1] = None
-
-    def nqueens(x):
-        """recursive backtracking function to find the solution"""
-        for y in range(n):
-            clear_a(x)
-            if reject(x, y):
-                a[x][1] = y
-                if (x == n - 1):  # accepts the solutions
-                    print(a)
-                else:
-                    nqueens(x + 1)  # moves on to next x value to continue
-
-    # start the recursive processing at x = 0
-    nqueens(0)
+    brd = init_brd(int(sys.argv[1]))
+    solutions = recursive_solve(brd, 0, 0, [])
+    for sol in solutions:
+        print(sol)
