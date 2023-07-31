@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""Defines a rectangle class."""
+"""Define rectangle class."""
 from models.base import Base
 
 
@@ -29,7 +29,7 @@ class Rectangle(Base):
 
     @property
     def width(self):
-        """Set/get the width of the Rectangle."""
+        """Set/get the width of Rectangle."""
         return self.__width
 
     @width.setter
