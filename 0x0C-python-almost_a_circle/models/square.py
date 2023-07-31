@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""Defines a square class."""
+"""Defines square class."""
 from models.rectangle import Rectangle
 
 
@@ -11,9 +11,9 @@ class Square(Rectangle):
 
         Args:
             size (int): The size of the new Square.
-            x (int): The x coordinate of the new Square.
-            y (int): The y coordinate of the new Square.
-            id (int): The identity of the new Square.
+            x (int): The x coordinate of new Square.
+            y (int): The y coordinate of new Square.
+            id (int): The identity of new Square.
         """
         super().__init__(size, size, x, y, id)
 
