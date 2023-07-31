@@ -21,7 +21,7 @@ Usage
     >>> print(matrix_divided(matrix, 3))
     [[1.0, 2.0, 3.0], [4.0, 5.0, 6.0]]
 
-quotients are rounded to a maximum of two decimal place.
+Note that quotients are rounded to a maximum of two decimal places.
 
 ::
 
@@ -32,14 +32,14 @@ quotients are rounded to a maximum of two decimal place.
     >>> print(matrix_divided(matrix, 3))
     [[0.33, 0.67, 1.0], [1.33, 1.67, 2.0]]
 
-The original matrix is left unchange.
+The original matrix is left unchanged.
 
 ::
 
     >>> print(matrix)
     [[1, 2, 3], [4, 5, 6]]
 
-The function can also handl float-point numbers.
+The function can also handle floating-point numbers.
 
 ::
 
@@ -50,7 +50,7 @@ The function can also handl float-point numbers.
     >>> print(matrix_divided(matrix, 3))
     [[0.37, -0.73, 1.1], [1.47, 1.83, -2.2]]
 
-Integers and floats can be combine.
+Integers and floats can be combined.
 
 ::
 
@@ -64,7 +64,7 @@ Integers and floats can be combine.
 Invalid Matrices
 ==============
 
-The parameter ``matrix`` must be a list of lists consist of either ints or
+The parameter ``matrix`` must be a list of lists consisting of either ints or
 floats. If ``matrix`` is not a list, a TypeError is raised.
 
 ::
@@ -98,7 +98,7 @@ But an empty list of lists will succeed.
     >>> print(matrix_divided(matrix, 3))
     [[]]
 
-An identical TypeError is raise if ``matrix`` is not specifically a list of
+An identical TypeError is raised if ``matrix`` is not specifically a list of
 lists.
 
 ::
@@ -122,7 +122,7 @@ neither ints nor floats.
     TypeError: matrix must be a matrix (list of lists) of integers/floats
 
 
-Finally, all the row in ``matrix`` must be the same size. If any rows are
+Finally, all the rows in ``matrix`` must be the same size. If any rows are
 of different sizes, a new TypeError is raised.
 
 ::
