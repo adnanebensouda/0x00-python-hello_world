@@ -1,4 +1,5 @@
 #!/usr/bin/node
+// task 8 size is mising
 const size = Math.floor(Number(process.argv[2]));
 if (isNaN(size)) {
 	  console.log('Missing size');
