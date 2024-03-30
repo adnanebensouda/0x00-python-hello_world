@@ -1,5 +1,5 @@
 #!/usr/bin/node
-"rectangle done"
+"""rectangle class done"""
 class Rectangle {
 	  constructor (w, h) {
 		      this.width = w;
